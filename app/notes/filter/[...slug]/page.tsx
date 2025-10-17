@@ -6,6 +6,7 @@ import {
 import NotesClient from "./Notes.client";
 import { fetchNotes } from "../../../../lib/api";
 import type { NoteTag } from "../../../../types/note";
+import type { Metadata } from "next";
 
 type Props = {
   params: Promise<{ slug: string[] }>;
@@ -20,7 +21,7 @@ function getFirstTag(slug: string[] | undefined): NoteTag | undefined {
     : undefined;
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
   const firstTag = getFirstTag(slug);
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: Props) {
       description: firstTag
         ? `Notes in the ${firstTag} category`
         : "All your notes",
-      url: `https://notehub.com/notes/${firstTag}??"All"`,
+      url: `https://notehub.com/notes/${firstTag ?? "All"}`,
       siteName: "NoteHub",
       images: [
         {
