@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { NoteTag } from "../../../../types/note";
+import type { NoteTag } from "@/types/note";
 import css from "./SidebarNotes.module.css";
 
 export default async function SidebarNotes() {
@@ -15,6 +15,14 @@ export default async function SidebarNotes() {
   return (
     <div>
       <ul className={css.menuList}>
+        <li>
+          <Link
+            href="/notes/action/create"
+            className={css.menuLink}
+          >
+            Create new note
+          </Link>
+        </li>
         {tags.map((tag) => (
           <li key={tag}>
             <Link
